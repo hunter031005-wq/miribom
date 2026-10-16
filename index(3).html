@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미리봄 · 프로그램 참여 장벽 사전 점검</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'%3E%3Cg fill='%23E9829C'%3E%3Cellipse cy='-5.5' rx='4' ry='5.5'/%3E%3Cellipse cy='-5.5' rx='4' ry='5.5' transform='rotate(72)'/%3E%3Cellipse cy='-5.5' rx='4' ry='5.5' transform='rotate(144)'/%3E%3Cellipse cy='-5.5' rx='4' ry='5.5' transform='rotate(216)'/%3E%3Cellipse cy='-5.5' rx='4' ry='5.5' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='2.2' fill='%23F2C14E'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#FFF9FA; --surface:#FFFFFF; --sunk:#FBF5F6; --ink:#2E2A33; --muted:#6E6774; --line:#EFE2E6;
+  --brand:#C94A6E; --brand-2:#EE9AB0; --brand-weak:#FDE8EE; --brand-ink:#FFFFFF;
+  --leaf:#3F8F5E; --leaf-weak:#E6F4E9; --leaf-ink:#2E7548;
+  --sun:#F2C14E; --sun-weak:#FFF4D2; --sun-ink:#8A6200;
+  --sky:#5BA4CF; --sky-weak:#E4F1FA; --sky-ink:#2A6B92;
+  --hit:#2F8150; --hit-weak:#E3F3E7; --miss:#6D6BA3; --miss-weak:#EDECF8; --hold:#A87400; --hold-weak:#FFF3D1;
+  --danger:#C2413A; --ins:#DDF2E1; --del:#FBE1E6; --focus:#C94A6E;
+  --shadow:0 1px 2px rgba(201,74,110,.05),0 10px 28px -16px rgba(150,60,90,.22);
+  --hero:linear-gradient(120deg,#FFEFF3 0%,#FFF7E3 55%,#ECF7EE 100%);
+  --branch:#9A7563; --petal:#F6B5C6; --header:rgba(255,249,250,.86);
+  --display:"Gowun Batang","Nanum Myeongjo",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1C171D; --surface:#241E26; --sunk:#2B242E; --ink:#F4ECF0; --muted:#B4A8B2; --line:#3A3039;
+  --brand:#F28DAA; --brand-2:#F5A8BE; --brand-weak:#3B2430; --brand-ink:#1C171D;
+  --leaf:#86D19B; --leaf-weak:#1E3426; --leaf-ink:#9EDDB0;
+  --sun:#F5CF6B; --sun-weak:#3A3118; --sun-ink:#F5CF6B;
+  --sky:#8CC4E6; --sky-weak:#1C2E3A; --sky-ink:#A9D6F0;
+  --hit:#86D19B; --hit-weak:#1E3426; --miss:#B3B1E3; --miss-weak:#2B2A40; --hold:#F5CF6B; --hold-weak:#3A3118;
+  --danger:#F08A80; --ins:#1F3A28; --del:#45242E; --focus:#F28DAA;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 28px -16px rgba(0,0,0,.6);
+  --hero:linear-gradient(120deg,#2E2029 0%,#2C2719 55%,#1C2A21 100%);
+  --branch:#B8968A; --petal:#E98AA6; --header:rgba(28,23,29,.86);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#1C171D; --surface:#241E26; --sunk:#2B242E; --ink:#F4ECF0; --muted:#B4A8B2; --line:#3A3039;
+  --brand:#F28DAA; --brand-2:#F5A8BE; --brand-weak:#3B2430; --brand-ink:#1C171D;
+  --leaf:#86D19B; --leaf-weak:#1E3426; --leaf-ink:#9EDDB0;
+  --sun:#F5CF6B; --sun-weak:#3A3118; --sun-ink:#F5CF6B;
+  --sky:#8CC4E6; --sky-weak:#1C2E3A; --sky-ink:#A9D6F0;
+  --hit:#86D19B; --hit-weak:#1E3426; --miss:#B3B1E3; --miss-weak:#2B2A40; --hold:#F5CF6B; --hold-weak:#3A3118;
+  --danger:#F08A80; --ins:#1F3A28; --del:#45242E; --focus:#F28DAA;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 28px -16px rgba(0,0,0,.6);
+  --hero:linear-gradient(120deg,#2E2029 0%,#2C2719 55%,#1C2A21 100%);
+  --branch:#B8968A; --petal:#E98AA6; --header:rgba(28,23,29,.86);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));background:var(--bg)}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font:15.5px/1.7 "Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;word-break:keep-all;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--header);backdrop-filter:blur(12px)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--header);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{max-width:1120px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:24px}
+.logo{display:flex;align-items:center;gap:9px;border:0;background:none;cursor:pointer;padding:4px 0;flex:none}
+.logo svg{width:28px;height:28px}
+.logo span{text-align:left;display:block}
+.logo b{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.01em;line-height:1}
+.logo small{display:block;font-size:11.5px;color:var(--muted);font-weight:500;margin-top:3px}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{display:flex;align-items:center;gap:8px;border:0;background:none;padding:8px 13px;border-radius:999px;cursor:pointer;color:var(--muted);white-space:nowrap;font-size:14.5px}
+nav button .n{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:700;background:var(--sunk);color:var(--muted);flex:none}
+nav button:hover{color:var(--ink);background:var(--sunk)}
+nav button.on{background:var(--brand-weak);color:var(--brand);font-weight:600}
+nav button.on .n{background:var(--brand);color:var(--brand-ink)}
+
+main{max-width:1040px;margin:0 auto;padding:40px 28px 72px}
+.foot{max-width:1040px;margin:0 auto;padding:0 28px 40px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.foot svg{width:16px;height:16px;flex:none}
+h1{font-family:var(--display);font-size:32px;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-family:var(--display);font-size:21px;margin:44px 0 14px;letter-spacing:-.01em}
+h3{font-size:15.5px;margin:0 0 10px}
+.lede{color:var(--muted);margin:0 0 28px;max-width:60ch;font-size:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)} .small{font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label.f{display:block;font-size:13.5px;font-weight:600;margin:14px 0 6px}
+input[type=text],input[type=date],input[type=password],select,textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px var(--brand-weak)}
+input:disabled{background:var(--sunk);color:var(--muted)}
+textarea{min-height:110px;resize:vertical;line-height:1.65}
+textarea.tall{min-height:260px}
+textarea[readonly]{background:var(--sunk)}
+.btn{border:1px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:10px;cursor:pointer;font-weight:600;font-size:14.5px;transition:border-color .15s,background .15s,transform .05s}
+.btn:hover{border-color:var(--brand-2)}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.pri:hover{filter:brightness(1.05)}
+.btn.warn{color:var(--danger)}
+.btn.danger{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn.sm{padding:5px 12px;font-size:13px;border-radius:8px}
+a.btn{text-decoration:none;color:inherit;display:inline-block}
+.linkbtn{border:0;background:none;color:var(--brand);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0;font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.tag.brand{background:var(--brand-weak);color:var(--brand)}
+.tag.c-move{background:var(--sky-weak);color:var(--sky-ink)}
+.tag.c-time{background:var(--sun-weak);color:var(--sun-ink)}
+.tag.c-lit{background:var(--leaf-weak);color:var(--leaf-ink)}
+.tag.c-cost{background:var(--brand-weak);color:var(--brand)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:currentColor}
+.ok{color:var(--hit);font-weight:600}
+
+/* home */
+.hero{position:relative;background:var(--hero);border-radius:24px;padding:40px 40px 36px;overflow:hidden;margin-bottom:22px;border:1px solid var(--line)}
+.hero h1{font-size:clamp(40px,6vw,58px);margin:0 0 12px;line-height:1.1}
+.hero p{margin:0;max-width:34em;color:var(--ink);opacity:.82;font-size:16.5px}
+.hero .sprig{position:absolute;right:-6px;top:-4px;width:min(300px,38%);height:auto;pointer-events:none}
+.hero .row{margin-top:22px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.flow button{border:1px solid var(--line);text-align:left;padding:20px 20px 18px;cursor:pointer;border-radius:16px;background:var(--surface);box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.flow button:hover{transform:translateY(-2px);border-color:var(--brand-2)}
+.flow .k{font-family:var(--display);font-size:30px;line-height:1;font-weight:700}
+.flow .s1 .k{color:var(--brand)} .flow .s2 .k{color:var(--sun-ink)} .flow .s3 .k{color:var(--leaf)}
+.flow .s1{border-top:4px solid var(--petal)} .flow .s2{border-top:4px solid var(--sun)} .flow .s3{border-top:4px solid var(--leaf)}
+.flow strong{display:block;margin:12px 0 4px;font-size:16.5px}
+.flow span{font-size:13.5px;color:var(--muted)}
+
+table{border-collapse:collapse;width:100%;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+th,td{border-bottom:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:13px;color:var(--muted);font-weight:600;background:var(--sunk)}
+td.c,th.c{text-align:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0;padding:5px;background:var(--sunk);border-radius:999px;width:fit-content;max-width:100%}
+.tabs button{border:0;background:none;padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--muted)}
+.tabs button.on{background:var(--surface);color:var(--brand);box-shadow:var(--shadow)}
+.tabs button:disabled{opacity:.4;cursor:not-allowed}
+pre.doc{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0;font:inherit;font-size:14.5px;max-height:420px;overflow:auto}
+.notice{border-radius:12px;background:var(--hold-weak);color:var(--ink);padding:12px 16px;font-size:14.5px;margin:12px 0;border:1px solid transparent}
+.notice::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sun);margin-right:9px;vertical-align:middle}
+.notice.info{background:var(--sky-weak)}
+.notice.info::before{background:var(--sky)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 6px;padding:0;list-style:none;counter-reset:s}
+.steps li{background:var(--sunk);border-radius:12px;padding:12px 14px;font-size:14px;counter-increment:s}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font-size:12px;font-weight:700;margin-right:8px}
+.finding{border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px;background:var(--surface);box-shadow:var(--shadow);border-left:5px solid var(--line)}
+.finding.j-적중{border-left-color:var(--hit)} .finding.j-오탐{border-left-color:var(--miss)} .finding.j-보류{border-left-color:var(--sun)}
+.finding .q{border-left:3px solid var(--petal);padding-left:12px;color:var(--muted);font-size:14.5px;margin:10px 0}
+.seg{display:inline-flex;background:var(--sunk);border-radius:10px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:6px 15px;cursor:pointer;border-radius:8px;font-weight:600;font-size:14px;color:var(--muted)}
+.seg button.on.적중{background:var(--hit);color:#fff} .seg button.on.오탐{background:var(--miss);color:#fff} .seg button.on.보류{background:var(--sun);color:#3A2C00}
+.cell b{font-size:17px} .cell .sub{display:block;font-size:12px;color:var(--muted)}
+.diff{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:14.5px}
+.diff ins{background:var(--ins);text-decoration:none;border-radius:3px} .diff del{background:var(--del);border-radius:3px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:70;max-width:calc(100% - 32px)}
+.toast.show{opacity:1}
+details summary{cursor:pointer;color:var(--muted);font-size:14px}
+.empty{text-align:center;padding:44px 20px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:16px}
+.drop{border:1.5px dashed var(--brand-2);border-radius:14px;padding:22px;text-align:center;background:var(--brand-weak);margin-top:14px;transition:background .15s}
+.drop.over{background:var(--surface);border-style:solid}
+.drop strong{display:block;margin-bottom:4px}
+#pf-status{font-size:13.5px;margin:8px 0 0;min-height:1em}
+#pf-status.err{color:var(--danger)}
+#modal{position:fixed;inset:0;z-index:60;background:rgba(46,30,40,.4);display:grid;place-items:center;padding:24px}
+#modal[hidden]{display:none}
+#modal .mbox{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;max-width:420px;width:100%;box-shadow:var(--shadow)}
+#modal p{margin:0 0 20px;white-space:pre-line}
+#modal .row{justify-content:flex-end}
+#ai-live{max-height:320px}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;
+  padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));
+  background:radial-gradient(120% 90% at 85% 0%,var(--brand-weak) 0%,transparent 55%),radial-gradient(90% 80% at 0% 100%,var(--leaf-weak) 0%,transparent 60%),var(--bg);transition:opacity .5s ease}
+#intro.out{opacity:0;pointer-events:none}
+#intro[hidden]{display:none}
+#intro .skip{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:20px;border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px;padding:6px 10px;z-index:2}
+#intro .wrap{max-width:700px;width:100%;position:relative;z-index:1}
+#intro .sheet{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 30px 34px;box-shadow:var(--shadow);
+  font-size:clamp(16px,2.3vw,19.5px);line-height:2.9;color:var(--muted);opacity:0;transform:translateY(10px);animation:i-in .8s ease forwards .15s}
+#intro .sheet .meta{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.5;margin-bottom:4px}
+#intro .sheet .meta i{width:9px;height:9px;border-radius:50%;background:var(--petal);display:inline-block}
+#intro mark{position:relative;white-space:nowrap;color:var(--muted);padding:2px 2px;border-radius:4px;background:transparent;animation:i-mark .55s ease forwards}
+#intro mark::after{content:attr(data-k);position:absolute;left:50%;top:100%;transform:translate(-50%,3px);font-size:12px;line-height:1;font-weight:700;padding:4px 9px;border-radius:99px;white-space:nowrap;opacity:0;animation:i-tag .4s ease forwards;animation-delay:inherit}
+#intro .m1{--mk:var(--sun-weak);--mt:var(--sun-ink);animation-delay:1s}
+#intro .m2{--mk:var(--sky-weak);--mt:var(--sky-ink);animation-delay:1.55s}
+#intro .m3{--mk:var(--leaf-weak);--mt:var(--leaf-ink);animation-delay:2.1s}
+#intro .m4{--mk:var(--brand-weak);--mt:var(--brand);animation-delay:2.65s}
+#intro mark::after{background:var(--mk);color:var(--mt)}
+#intro .head{margin-top:46px;opacity:0;animation:i-in .8s ease forwards 3.3s}
+#intro h1{font-family:var(--display);font-size:clamp(52px,9vw,88px);line-height:1;letter-spacing:-.02em;margin:0;display:flex;align-items:center;gap:14px}
+#intro h1 svg{width:.62em;height:.62em}
+#intro .head p{margin:16px 0 28px;font-size:clamp(15.5px,2vw,18px);color:var(--muted);max-width:38ch}
+#intro .enter{font-size:16px;padding:13px 30px;border-radius:999px}
+#intro .petal{position:absolute;top:-24px;width:13px;height:10px;background:var(--petal);border-radius:100% 0 100% 0;opacity:0;animation:fall linear infinite}
+@keyframes fall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:.85}100%{opacity:0;transform:translate(-90px,105vh) rotate(540deg)}}
+@keyframes i-in{to{opacity:1;transform:none}}
+@keyframes i-mark{to{background:var(--mk);color:var(--ink)}}
+@keyframes i-tag{to{opacity:1}}
+
+@media (max-width:860px){
+  .bar{flex-wrap:wrap;gap:6px;padding:10px 16px}
+  nav{margin-left:0;width:100%}
+  main{padding:26px 16px 56px}
+  .foot{padding:0 16px 32px}
+  .grid2,.flow,.steps{grid-template-columns:1fr}
+  .hero{padding:28px 22px}
+  .hero .sprig{width:112px;top:4px;right:-4px;opacity:.9}
+  .hero h1{max-width:calc(100% - 100px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .toast,.flow button,.btn{transition:none}
+  #intro,#intro *{animation:none!important;transition:none!important}
+  #intro .sheet,#intro .head{opacity:1;transform:none}
+  #intro mark{background:var(--mk);color:var(--ink)}
+  #intro mark::after{opacity:1}
+  #intro .petal{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <button class="logo" onclick="A.go('home')" aria-label="미리봄 처음 화면"><svg viewBox="-12 -12 24 24" aria-hidden="true"><g fill="var(--petal)"><ellipse cy="-5.5" rx="4" ry="5.5"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(72)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(144)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(216)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(288)"/></g><circle r="2.2" fill="var(--sun)"/></svg><span><b>미리봄</b><small>프로그램 참여 장벽 사전 점검</small></span></button>
+  <nav id="nav" aria-label="단계"></nav>
+</div></header>
+<main id="main"></main>
+<footer class="foot"><svg viewBox="-12 -12 24 24" aria-hidden="true"><g fill="var(--petal)"><ellipse cy="-5.5" rx="4" ry="5.5"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(72)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(144)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(216)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(288)"/></g><circle r="2.2" fill="var(--sun)"/></svg><span>작업 내용은 이 브라우저에만 저장돼요. 다른 컴퓨터에서 이어 하려면 ‘처음 화면 → 자료 관리’에서 백업 파일을 내보내 불러오세요.</span></footer>
+<div class="toast" id="toast"></div>
+<div id="modal" role="dialog" aria-modal="true" hidden><div class="mbox"><p id="mmsg"></p><div class="row"><button class="btn" id="mno">취소</button><button class="btn pri" id="myes">확인</button></div></div></div>
+<div id="intro" role="dialog" aria-modal="true" aria-label="미리봄 소개" hidden>
+  <span class="petal" style="left:12%;animation-duration:9s;animation-delay:0.2s;transform:scale(1)"></span><span class="petal" style="left:28%;animation-duration:11s;animation-delay:1.4s;transform:scale(0.8)"></span><span class="petal" style="left:44%;animation-duration:8.5s;animation-delay:2.6s;transform:scale(1.1)"></span><span class="petal" style="left:61%;animation-duration:10s;animation-delay:0.8s;transform:scale(0.9)"></span><span class="petal" style="left:76%;animation-duration:12s;animation-delay:2s;transform:scale(1)"></span><span class="petal" style="left:88%;animation-duration:9.5s;animation-delay:3.2s;transform:scale(0.75)"></span><span class="petal" style="left:95%;animation-duration:10.5s;animation-delay:1s;transform:scale(0.95)"></span><span class="petal" style="left:5%;animation-duration:12.5s;animation-delay:3.8s;transform:scale(0.85)"></span>
+  <button class="skip" onclick="A.enter()">건너뛰기</button>
+  <div class="wrap">
+    <div class="sheet">
+      <span class="meta"><i></i>어느 프로그램 계획서의 한 문단</span>
+      매주 화요일 <mark class="m1" data-k="시간">오전 9시</mark>, 읍내 복지관 <mark class="m2" data-k="이동">3층 교육실</mark>에서 진행합니다.
+      신청은 홈페이지 <mark class="m3" data-k="문해">온라인 신청서</mark>로 받으며, <mark class="m4" data-k="비용">교재비 1만 원</mark>은 본인 부담입니다.
+    </div>
+    <div class="head">
+      <h1><svg viewBox="-12 -12 24 24" aria-hidden="true"><g fill="var(--petal)"><ellipse cy="-5.5" rx="4" ry="5.5"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(72)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(144)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(216)"/><ellipse cy="-5.5" rx="4" ry="5.5" transform="rotate(288)"/></g><circle r="2.2" fill="var(--sun)"/></svg>미리봄</h1>
+      <p>좋은 계획서도 참여로 이어지지 않을 때가 있어요. 실행하기 전에, 참여를 막는 지점을 미리 봅니다.</p>
+      <button class="btn pri enter" id="introEnter" onclick="A.enter()">시작하기</button>
+    </div>
+  </div>
+</div>
+<input type="file" id="importFile" accept=".json,application/json" hidden onchange="A.importFile(this)">
+
+<script>
+const KEY = 'miribom-v1';
+const METHODS = { human: '사람 점검', general: '일반 AI 요청', explicit: '조건 명시 AI 요청' };
+const METHOD_KEYS = ['human', 'general', 'explicit'];
+const DEFAULT_CONDS = [
+  { id: 'move', name: '이동', desc: '프로그램 장소까지 오가는 수단과 거리, 동행이 필요한지' },
+  { id: 'time', name: '시간', desc: '운영 요일·시간대가 대상자의 생활 리듬(식사, 돌봄, 일, 병원 등)과 맞는지' },
+  { id: 'lit',  name: '문해', desc: '안내문·신청서·활동 자료를 대상자가 읽고 이해할 수 있는지' },
+  { id: 'cost', name: '비용', desc: '본인부담금, 재료비, 교통비 등 대상자가 부담하는 비용' }
+];
+const JUDGE = ['적중', '오탐', '보류'];
+/* 미리봄 AI: 실험 내내 하나로 고정 */
+const AI = { model: 'claude-opus-5-5', name: 'Claude Opus 5.5', effort: 'medium', effortKo: '중간' };
+let aiBusy = false, aiCtl = null, aiMsg = '';
+let aiAvail = null; // null: 확인 중, true: 사용 가능, false: 이 화면에서는 사용 불가
+const cap = name => (window.claude && typeof window.claude.use === 'function') ? window.claude.use(name).catch(() => null) : Promise.resolve(null);
+let samplePromise = null, dlPromise = null;
+const getSample = () => samplePromise || (samplePromise = cap('sample'));
+const getDownloads = () => dlPromise || (dlPromise = cap('downloads'));
+const AI_ERR = {
+  not_granted: 'Claude 사용을 허락하지 않아서 AI를 쓸 수 없어요. 페이지를 새로 열면 다시 물어봐요.',
+  sampling_disabled: '이 Claude 계정에서는 AI 호출을 쓸 수 없어요.',
+  capability_disabled: '이 화면에서는 AI를 쓸 수 없어요.', capability_removed: '이 화면에서는 AI를 쓸 수 없어요.', not_declared: '이 화면에서는 AI를 쓸 수 없어요.',
+  rate_limited: 'Claude 사용량 한도에 닿았거나 요청이 몰렸어요. 잠시 뒤 다시 눌러 주세요.',
+  session_expired: 'Claude 로그인이 끝났어요. 다시 로그인한 뒤 실행해 주세요.',
+  prompt_too_large: '계획서가 너무 길어요. 본문을 줄여 다시 실행해 주세요.',
+  refused: 'Claude가 이 요청에 답하지 않았어요. 계획서 내용을 확인해 주세요.',
+  empty_completion: 'Claude가 빈 답변을 보냈어요. 다시 실행해 주세요.',
+  upstream_error: '연결이 잠시 끊겼어요. 다시 실행해 주세요.'
+};
+const VIEWS = [
+  ['home', '처음 화면', ''], ['plans', '계획서 관리', '1'], ['run', '점검 실행', '2'],
+  ['judge', '판단 기록지', '3'], ['summary', '요약 비교', '4'], ['revision', '수정 전후 비교', '5']
+];
+
+let S;
+const A = {};
+let keep = new Set(); // 이번에 판정한 지적은 '미판정만' 보기에서도 잠시 남겨 둠
+
+function def() {
+  return {
+    v: 1, conds: JSON.parse(JSON.stringify(DEFAULT_CONDS)), plans: [], runs: [], findings: [], revisions: {},
+    ui: { view: 'home', planId: null, method: 'human', blind: true, jPlan: 'all', jShow: 'todo', revPlan: null, editPlan: null, lastJudge: '' }
+  };
+}
+function load() {
+  S = def();
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) { const d = JSON.parse(raw); const base = def(); S = Object.assign(base, d); S.ui = Object.assign(def().ui, d.ui || {}); }
+  } catch (e) { /* storage unavailable: start empty */ }
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch (e) { toast('브라우저 저장에 실패했어요. 백업 파일을 내보내 두세요.'); }
+}
+
+/* ---------- helpers ---------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const nowStamp = () => new Date().toLocaleString('ko-KR');
+const $ = id => document.getElementById(id);
+const val = id => ($(id) ? $(id).value.trim() : '');
+const plan = id => S.plans.find(p => p.id === id);
+const runOf = (pid, m) => S.runs.find(r => r.planId === pid && r.method === m);
+const fOfRun = rid => S.findings.filter(f => f.runId === rid);
+const condTag = id => `<span class="tag c-${esc(id)}"><span class="dot"></span>${esc(condName(id))}</span>`;
+const condName = id => id === 'etc' ? '기타' : (S.conds.find(c => c.id === id) || {}).name || '미분류';
+const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+const fCode = f => 'F-' + hash(f.id).toString(36).toUpperCase().slice(0, 4);
+const planLabel = p => p ? `${p.practice ? '연습' : '계획서 ' + p.code}${p.title ? ' · ' + p.title : ''}` : '(삭제된 계획서)';
+function ask(msg, yes = '확인', danger = false) {
+  return new Promise(res => {
+    const m = $('modal'), y = $('myes'), n = $('mno');
+    $('mmsg').textContent = msg; y.textContent = yes; y.className = 'btn ' + (danger ? 'danger' : 'pri');
+    m.hidden = false; y.focus();
+    const kd = e => { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); done(false); } };
+    const done = v => { m.hidden = true; y.onclick = n.onclick = null; document.removeEventListener('keydown', kd, true); res(v); };
+    document.addEventListener('keydown', kd, true);
+    y.onclick = () => done(true); n.onclick = () => done(false);
+  });
+}
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2400); }
+function commit(msg) { save(); render(); if (msg) toast(msg); }
+
+/* ---------- prompts ---------- */
+function buildPrompt(p, method) {
+  const head = '다음은 실행 전의 사회복지 프로그램 계획서입니다. 이 프로그램을 실행했을 때 대상자의 참여를 가로막을 수 있는 지점을 찾아 지적해 주세요.';
+  const conds = method === 'explicit'
+    ? '\n\n다음 네 가지 참여조건에 비추어 검토해 주세요.\n' + S.conds.map(c => `- ${c.name}: ${c.desc}`).join('\n') + '\n각 지적에는 해당하는 참여조건을 표시해 주세요.'
+    : '';
+  const rules = '\n\n지켜 주세요.\n- 계획서에 적혀 있지 않은 내용은 사실처럼 단정하지 마세요. 정보가 없으면 "계획서에 정보 없음"이라고 쓰세요.\n- 각 지적마다 근거가 된 계획서 문장을 그대로 인용해 주세요.\n- 지적은 번호를 붙여 하나씩 나누어 써 주세요.';
+  const fmt = method === 'explicit' ? '\n\n형식\n1. 지적:\n   근거(계획서 인용):\n   참여조건:' : '\n\n형식\n1. 지적:\n   근거(계획서 인용):';
+  const body = `\n\n[계획서]\n대상: ${p.target || '(적혀 있지 않음)'}\n제목: ${p.title || ''}\n\n${p.text}`;
+  return head + conds + rules + fmt + body;
+}
+
+/* ---------- navigation ---------- */
+A.go = v => { keep.clear(); S.ui.view = v; save(); render(); window.scrollTo(0, 0); };
+
+function render() {
+  $('nav').innerHTML = VIEWS.map(([k, t, n]) =>
+    `<button class="${S.ui.view === k ? 'on' : ''}" ${S.ui.view === k ? 'aria-current="page"' : ''} onclick="A.go('${k}')">${n ? `<span class="n">${n}</span>` : ''}${t}</button>`).join('');
+  const f = { home: vHome, plans: vPlans, run: vRun, judge: vJudge, summary: vSummary, revision: vRevision }[S.ui.view] || vHome;
+  $('main').innerHTML = f();
+}
+
+/* ---------- 0. 실험 개요 ---------- */
+function vHome() {
+  const main = S.plans.filter(p => !p.practice);
+  const doneRuns = S.runs.filter(r => main.some(p => p.id === r.planId)).length;
+  const judged = S.findings.filter(f => f.judgment).length;
+  const grid = main.length ? `<div class="tw"><table><tr><th>계획서</th>${METHOD_KEYS.map(m => `<th class="c">${METHODS[m]}</th>`).join('')}<th class="c">기준본</th></tr>
+    ${main.map(p => `<tr><td>${esc(planLabel(p))}</td>${METHOD_KEYS.map(m => { const r = runOf(p.id, m); return `<td class="c">${r ? `<span class="ok">완료</span><span class="small muted"> ${esc(r.date)}</span>` : '<span class="muted">—</span>'}</td>`; }).join('')}
+    <td class="c">${p.lockedAt ? '<span class="ok">고정</span>' : '<span class="muted">작성 중</span>'}</td></tr>`).join('')}</table></div>`
+    : `<div class="empty">아직 계획서가 없어요. <button class="btn pri" onclick="A.go('plans')">계획서 넣기</button></div>`;
+  return `
+  <section class="hero">
+    <svg class="sprig" viewBox="0 0 260 210" aria-hidden="true">
+      <defs><g id="bl"><g fill="var(--petal)"><ellipse cy="-6" rx="4.6" ry="6.4"/><ellipse cy="-6" rx="4.6" ry="6.4" transform="rotate(72)"/><ellipse cy="-6" rx="4.6" ry="6.4" transform="rotate(144)"/><ellipse cy="-6" rx="4.6" ry="6.4" transform="rotate(216)"/><ellipse cy="-6" rx="4.6" ry="6.4" transform="rotate(288)"/></g><circle r="2.4" fill="var(--sun)"/></g></defs>
+      <path d="M262 12 C 200 40, 150 70, 92 132 C 70 156, 52 176, 30 206" fill="none" stroke="var(--branch)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M180 52 C 170 30, 150 22, 132 22" fill="none" stroke="var(--branch)" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M118 104 C 140 108, 156 124, 160 146" fill="none" stroke="var(--branch)" stroke-width="2.4" stroke-linecap="round"/>
+      <ellipse cx="208" cy="40" rx="5" ry="10" fill="var(--leaf)" opacity=".75" transform="rotate(-50 208 40)"/>
+      <ellipse cx="74" cy="160" rx="4.5" ry="9" fill="var(--leaf)" opacity=".7" transform="rotate(35 74 160)"/>
+      <use href="#bl" transform="translate(132 22) scale(1.5)"/>
+      <use href="#bl" transform="translate(228 30) scale(1.15) rotate(20)"/>
+      <use href="#bl" transform="translate(160 146) scale(1.35) rotate(12)"/>
+      <use href="#bl" transform="translate(104 114) scale(1.05) rotate(40)"/>
+      <use href="#bl" transform="translate(56 184) scale(1.2) rotate(-10)"/>
+      <circle cx="186" cy="60" r="4.5" fill="var(--brand-2)"/><circle cx="140" cy="92" r="3.5" fill="var(--brand-2)"/><circle cx="84" cy="146" r="4" fill="var(--brand-2)"/>
+    </svg>
+    <h1>미리봄</h1>
+    <p>프로그램을 시작하기 전에, 대상자의 참여를 막을 수 있는 지점을 미리 봅니다. 지적은 AI가 할 수 있지만, 맞는지와 반영할지는 사람이 정합니다.</p>
+    <div class="row"><button class="btn pri" onclick="A.go('plans')">계획서 넣기</button><button class="btn" onclick="A.go('summary')">요약 비교 보기</button></div>
+  </section>
+  <div class="flow">
+    <button class="s1" onclick="A.go('plans')"><div class="k">1</div><strong>계획서 넣기</strong><span>계획서를 입력하고 기준본으로 고정해요.</span></button>
+    <button class="s2" onclick="A.go('run')"><div class="k">2</div><strong>지적과 근거 확인</strong><span>사람이 먼저 점검하고, AI 답변을 지적 단위로 나눠 적어요.</span></button>
+    <button class="s3" onclick="A.go('judge')"><div class="k">3</div><strong>채택·보류 판단</strong><span>지적마다 적중·오탐·보류를 판정하고 반영 여부를 정해요.</span></button>
+  </div>
+
+  <h2>실험 진행 현황</h2>
+  <p class="small muted">본실험 점검 ${doneRuns} / ${main.length * 3 || 9}회 · 지적 ${S.findings.length}건 중 판정 ${judged}건 (연습용 계획서는 현황과 비교에서 빠져요)</p>
+  ${grid}
+
+  <h2>AI 점검 방식</h2>
+  <div class="panel">
+    <p style="margin:0 0 6px">실험에 쓰는 AI는 <strong>${AI.name}</strong> 하나로 고정해요. 일반 요청과 조건 명시 요청 모두 같은 모델의 새 대화에서 실행해서, 두 방식은 요청문만 달라요.</p>
+    <p class="small muted" style="margin:0">${aiAvail === true ? '<span class="ok">AI 바로 실행 가능</span> · 이 화면에서는 버튼으로 바로 점검할 수 있어요.' : '점검 실행 화면에서 요청문을 복사해 Claude 앱에서 실행하고, 답변 원문을 그대로 붙여 넣어 저장해요.'}</p>
+  </div>
+
+  <h2>자료 관리</h2>
+  <div class="panel">
+    <div class="row">
+      <button class="btn pri" onclick="A.exportBackup()">백업 파일 내보내기</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">백업 파일 불러오기</button>
+      <button class="btn" onclick="A.exportCSV('findings')">지적 기록 CSV</button>
+      <button class="btn" onclick="A.exportCSV('runs')">점검 기록 CSV</button>
+    </div>
+    <p class="small muted" style="margin:12px 0 0">CSV는 엑셀에서 바로 열려요. 백업 파일(.json)은 다른 컴퓨터에서 ‘불러오기’로 이어서 작업할 때 써요.</p>
+    <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+    <div class="row">
+      <button class="btn" onclick="A.addSample()">연습용 예시 계획서 넣기</button>
+      <button class="btn" onclick="A.replayIntro()">인트로 다시 보기</button>
+      <button class="btn warn" onclick="A.resetAll()">모든 자료 지우기</button>
+    </div>
+  </div>
+  <p class="small muted">미리봄은 판단을 돕는 도구예요. 지적의 타당성과 계획서 수정의 최종 판단과 책임은 사용자에게 있어요.</p>`;
+}
+
+/* ---------- 1. 계획서 관리 ---------- */
+function vPlans() {
+  const anyRun = S.runs.length > 0;
+  const ed = S.ui.editPlan;
+  const p = ed && ed !== 'new' ? plan(ed) : null;
+  const form = ed ? `
+    <div class="panel">
+      <h3>${ed === 'new' ? '새 계획서' : '계획서 수정'}</h3>
+      <div class="grid2">
+        <div><label class="f" for="pf-code">구분 (A, B, C …)</label><input type="text" id="pf-code" value="${esc(p ? p.code : '')}" placeholder="A"></div>
+        <div><label class="f" for="pf-target">대상</label><input type="text" id="pf-target" value="${esc(p ? p.target : '')}" placeholder="예: 재가 독거 어르신 15명"></div>
+      </div>
+      <label class="f" for="pf-title">프로그램 제목</label><input type="text" id="pf-title" value="${esc(p ? p.title : '')}">
+      <div class="drop" id="drop" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="A.dropFile(event)">
+        <strong>계획서 파일 첨부</strong>
+        <span>여기에 끌어다 놓거나 <button type="button" class="linkbtn" onclick="document.getElementById('pf-file').click()">파일 고르기</button></span>
+        <div class="small muted" style="margin-top:4px">.hwp · .hwpx · .docx · .pdf · .txt를 읽을 수 있어요. 파일은 이 브라우저 안에서만 읽고 어디에도 올라가지 않아요.</div>
+        <input type="file" id="pf-file" hidden accept=".txt,.md,.docx,.pdf,.hwpx,.hwp" onchange="A.pickFile(this)">
+      </div>
+      <p id="pf-status"></p>
+      <label class="f" for="pf-text">계획서 본문 ${p && p.sourceFile ? `<span class="muted small">(원본 파일: ${esc(p.sourceFile)})</span>` : ''}</label>
+      <textarea id="pf-text" class="tall" placeholder="목적, 회기 구성, 운영 장소와 시간, 모집 방법, 비용 등을 그대로 붙여 넣으세요.">${esc(p ? p.text : '')}</textarea>
+      <label class="row small" style="margin-top:10px"><input type="checkbox" id="pf-practice" ${p && p.practice ? 'checked' : ''}> 연습용 계획서 (예비 실행에만 쓰고 비교에서 뺌)</label>
+      <div class="row" style="margin-top:16px"><button class="btn pri" onclick="A.savePlan()">저장</button><button class="btn" onclick="A.editPlan(null)">취소</button></div>
+    </div>` : `<button class="btn pri" onclick="A.editPlan('new')">새 계획서 추가</button>`;
+
+  const list = S.plans.length ? S.plans.map(p => {
+    const runs = S.runs.filter(r => r.planId === p.id).length;
+    return `<div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <div><strong>${esc(planLabel(p))}</strong> ${p.practice ? '<span class="tag">연습용</span>' : ''}
+          ${p.lockedAt ? `<span class="tag brand">기준본 고정 ${esc(p.lockedAt)}</span>` : '<span class="tag">작성 중</span>'}
+          <div class="small muted">대상: ${esc(p.target || '—')} · 점검 ${runs}회${p.sourceFile ? ' · 원본 파일: ' + esc(p.sourceFile) : ''}</div></div>
+        <div class="row">
+          ${p.lockedAt ? '' : `<button class="btn sm" onclick="A.editPlan('${p.id}')">수정</button><button class="btn sm pri" onclick="A.lockPlan('${p.id}')">기준본 고정</button>`}
+          ${runs ? '' : `<button class="btn sm warn" onclick="A.delPlan('${p.id}')">삭제</button>`}
+        </div>
+      </div>
+      <details style="margin-top:10px"><summary>본문 보기</summary><pre class="doc" style="margin-top:8px">${esc(p.text)}</pre></details>
+    </div>`;
+  }).join('') : '';
+
+  return `
+  <h1>계획서 관리</h1>
+  <p class="lede">점검할 계획서를 넣고, 점검을 시작하기 전에 기준본으로 고정해요. 고정한 뒤에는 본문을 바꿀 수 없어서 모든 방식이 같은 글을 점검하게 돼요.</p>
+  ${form}
+  <div style="margin-top:16px">${list}</div>
+
+  <h2>참여조건 4종</h2>
+  <p class="small muted">‘조건 명시 AI 요청’에 그대로 들어가는 설명이에요. ${anyRun ? '점검이 시작되어 더 이상 바꿀 수 없어요.' : '첫 점검을 저장하면 고정돼요.'}</p>
+  <div class="panel">
+    ${S.conds.map((c, i) => `<div class="grid2" style="grid-template-columns:120px 1fr;margin-bottom:8px">
+      <input type="text" value="${esc(c.name)}" ${anyRun ? 'disabled' : ''} onchange="A.setCond(${i},'name',this.value)" aria-label="조건 이름">
+      <input type="text" value="${esc(c.desc)}" ${anyRun ? 'disabled' : ''} onchange="A.setCond(${i},'desc',this.value)" aria-label="조건 설명"></div>`).join('')}
+  </div>`;
+}
+A.editPlan = id => { srcFile = null; S.ui.editPlan = id; save(); render(); };
+A.savePlan = () => {
+  const text = val('pf-text');
+  if (!text) return toast('계획서 본문을 넣어 주세요.');
+  const data = { code: val('pf-code') || '?', title: val('pf-title'), target: val('pf-target'), text, practice: $('pf-practice').checked };
+  if (srcFile) data.sourceFile = srcFile;
+  srcFile = null;
+  if (S.ui.editPlan === 'new') S.plans.push(Object.assign({ id: uid(), lockedAt: null, aiOrder: null, created: nowStamp() }, data));
+  else Object.assign(plan(S.ui.editPlan), data);
+  S.ui.editPlan = null; commit('계획서를 저장했어요.');
+};
+A.lockPlan = async id => {
+  if (!await ask('기준본으로 고정하면 본문을 더 이상 고칠 수 없어요. 고정할까요?', '고정하기')) return;
+  plan(id).lockedAt = today(); commit('기준본으로 고정했어요.');
+};
+/* ---------- 계획서 파일 읽기 (브라우저 안에서만 처리) ---------- */
+let srcFile = null;
+const LIBS = {
+  mammoth: ['https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js', () => window.mammoth],
+  pdfjs:   ['https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js', () => window.pdfjsLib],
+  jszip:   ['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js', () => window.JSZip],
+  cfb:     ['https://cdn.jsdelivr.net/npm/cfb@1.2.2/dist/cfb.min.js', () => window.CFB],
+  pako:    ['https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js', () => window.pako]
+};
+const PDF_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+const loadedLibs = {};
+function lib(name) {
+  if (loadedLibs[name]) return loadedLibs[name];
+  const [src, get] = LIBS[name];
+  loadedLibs[name] = new Promise((res, rej) => {
+    if (get()) return res(get());
+    const sc = document.createElement('script');
+    sc.src = src;
+    sc.onload = () => get() ? res(get()) : rej(new Error('LIB'));
+    sc.onerror = () => { delete loadedLibs[name]; rej(new Error('LIB')); };
+    document.head.appendChild(sc);
+  });
+  return loadedLibs[name];
+}
+async function extractText(file) {
+  const ext = (file.name.split('.').pop() || '').toLowerCase();
+  if (file.size > 20 * 1024 * 1024) throw new Error('SIZE');
+  const buf = await file.arrayBuffer();
+  if (ext === 'txt' || ext === 'md') {
+    let t = new TextDecoder('utf-8').decode(buf);
+    if (t.includes('\uFFFD')) { try { t = new TextDecoder('euc-kr').decode(buf); } catch (e) {} }
+    return t;
+  }
+  if (ext === 'docx') {
+    const m = await lib('mammoth');
+    return (await m.extractRawText({ arrayBuffer: buf })).value;
+  }
+  if (ext === 'pdf') {
+    const pdfjs = await lib('pdfjs');
+    pdfjs.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+    const doc = await pdfjs.getDocument({ data: buf }).promise;
+    const pages = [];
+    for (let i = 1; i <= doc.numPages; i++) {
+      const c = await (await doc.getPage(i)).getTextContent();
+      let line = ''; const lines = [];
+      for (const it of c.items) { line += it.str; if (it.hasEOL) { lines.push(line); line = ''; } }
+      if (line) lines.push(line);
+      pages.push(lines.join('\n'));
+    }
+    return pages.join('\n\n');
+  }
+  if (ext === 'hwp') return readHwp(new Uint8Array(buf));
+  if (ext === 'hwpx') {
+    const Z = await lib('jszip');
+    const zip = await Z.loadAsync(buf);
+    const names = Object.keys(zip.files).filter(n => /^Contents\/section\d+\.xml$/i.test(n))
+      .sort((a, b) => parseInt(a.match(/\d+/)[0]) - parseInt(b.match(/\d+/)[0]));
+    if (!names.length) throw new Error('HWPX');
+    const out = [];
+    for (const n of names) {
+      const xml = new DOMParser().parseFromString(await zip.file(n).async('string'), 'application/xml');
+      const paras = Array.from(xml.getElementsByTagNameNS('*', 'p'));
+      const byPara = new Map(paras.map(pp => [pp, '']));
+      for (const t of Array.from(xml.getElementsByTagNameNS('*', 't'))) {
+        let a = t.parentNode;
+        while (a && a.localName !== 'p') a = a.parentNode;
+        if (a && byPara.has(a)) byPara.set(a, byPara.get(a) + t.textContent);
+      }
+      for (const pp of paras) { const tx = byPara.get(pp).trim(); if (tx) out.push(tx); }
+    }
+    return out.join('\n');
+  }
+  throw new Error('TYPE');
+}
+/* HWP 5.0 (한글 바이너리) 본문 읽기: 복합 문서 → BodyText/Section* → (압축 해제) → 문단 글자 레코드 */
+async function readHwp(bytes) {
+  const [CFB, pako] = await Promise.all([lib('cfb'), lib('pako')]);
+  let doc;
+  try { doc = CFB.read(bytes, { type: 'array' }); } catch (e) { throw new Error('HWPOLD'); }
+  const head = CFB.find(doc, 'FileHeader');
+  if (!head || !head.content) throw new Error('HWPOLD');
+  const h = head.content;
+  const flags = h[36] | (h[37] << 8) | (h[38] << 16) | (h[39] << 24);
+  if (flags & 2) throw new Error('HWPLOCK');
+  if (flags & 4) throw new Error('HWPDIST');
+  const compressed = !!(flags & 1);
+  const secs = doc.FullPaths.map((pth, i) => ({ pth, e: doc.FileIndex[i] }))
+    .filter(x => /\/BodyText\/Section\d+$/i.test(x.pth) && x.e.content)
+    .sort((a, b) => parseInt(a.pth.match(/(\d+)$/)[1]) - parseInt(b.pth.match(/(\d+)$/)[1]));
+  if (!secs.length) throw new Error('HWPOLD');
+  const out = [];
+  for (const { e } of secs) {
+    let data = Uint8Array.from(e.content);
+    if (compressed) data = pako.inflateRaw(data);
+    const dv = new DataView(data.buffer, data.byteOffset, data.byteLength);
+    let pos = 0;
+    while (pos + 4 <= data.length) {
+      const hd = dv.getUint32(pos, true); pos += 4;
+      const tag = hd & 0x3FF;
+      let size = (hd >>> 20) & 0xFFF;
+      if (size === 0xFFF) { size = dv.getUint32(pos, true); pos += 4; }
+      if (tag === 67) { // HWPTAG_PARA_TEXT
+        let t = '';
+        const end = Math.min(pos + size, data.length);
+        for (let i = pos; i + 1 < end; ) {
+          const c = dv.getUint16(i, true);
+          if (c >= 32) { t += String.fromCharCode(c); i += 2; continue; }
+          if ([0, 10, 13, 24, 25, 26, 27, 28, 29, 30, 31].includes(c)) {
+            if (c === 10) t += '\n'; else if (c === 30 || c === 31) t += ' '; else if (c === 24) t += '-';
+            i += 2;
+          } else { // 인라인·확장 컨트롤은 16바이트
+            if (c === 9) t += '\t';
+            i += 16;
+          }
+        }
+        t = t.trim();
+        if (t) out.push(t);
+      }
+      pos += size;
+    }
+  }
+  return out.join('\n');
+}
+async function handleFile(file) {
+  const st = $('pf-status');
+  st.className = ''; st.textContent = `‘${file.name}’을 읽는 중이에요…`;
+  try {
+    let text = (await extractText(file)).replace(/\r\n?/g, '\n').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+    if (!text) throw new Error('EMPTY');
+    const ta = $('pf-text');
+    if (ta.value.trim() && !await ask('지금 적혀 있는 본문을 파일 내용으로 바꿀까요?', '바꾸기')) { st.textContent = ''; return; }
+    ta.value = text;
+    if (!$('pf-title').value.trim()) $('pf-title').value = file.name.replace(/\.[^.]+$/, '');
+    srcFile = file.name;
+    st.textContent = `‘${file.name}’에서 ${text.length.toLocaleString()}자를 가져왔어요. 표나 줄바꿈이 어긋났을 수 있으니 저장하기 전에 한 번 읽어 보세요.`;
+  } catch (e) {
+    const msg = {
+      HWPOLD: 'HWP 파일 안에서 본문을 찾지 못했어요. 아주 오래된 한글 형식일 수 있어요. 한글에서 HWPX나 PDF로 저장해 올려 주세요.',
+      HWPLOCK: '암호가 걸린 HWP 파일이에요. 한글에서 암호를 푼 뒤 다시 올려 주세요.',
+      HWPDIST: '배포용 HWP 문서라 글자를 꺼낼 수 없어요. 원본 파일을 쓰거나 PDF로 저장해 올려 주세요.',
+      HWPX: 'HWPX 파일 안에서 본문을 찾지 못했어요. PDF나 DOCX로 저장해 올려 주세요.',
+      SIZE: '20MB보다 큰 파일은 읽지 않아요. 본문만 복사해 붙여 넣어 주세요.',
+      TYPE: '.hwp, .hwpx, .docx, .pdf, .txt 파일만 읽을 수 있어요.',
+      EMPTY: '파일에서 글자를 찾지 못했어요. 스캔한 PDF라면 본문을 직접 붙여 넣어 주세요.',
+      LIB: '파일을 읽는 도구를 불러오지 못했어요. 인터넷 연결을 확인하거나, 본문을 복사해 붙여 넣어 주세요.'
+    }[e.message] || '파일을 읽지 못했어요. 다른 형식으로 저장하거나 본문을 붙여 넣어 주세요.';
+    st.className = 'err'; st.textContent = msg;
+  }
+}
+A.pickFile = input => { const f = input.files[0]; input.value = ''; if (f) handleFile(f); };
+A.dropFile = e => { e.preventDefault(); $('drop').classList.remove('over'); const f = e.dataTransfer.files[0]; if (f) handleFile(f); };
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => e.preventDefault());
+A.delPlan = async id => { if (!await ask('이 계획서를 지울까요?', '지우기', true)) return; S.plans = S.plans.filter(p => p.id !== id); commit('지웠어요.'); };
+A.setCond = (i, k, v) => { S.conds[i][k] = v.trim(); save(); };
+
+/* ---------- 2. 점검 실행 ---------- */
+function vRun() {
+  const locked = S.plans.filter(p => p.lockedAt);
+  if (!locked.length) return `<h1>점검 실행</h1><div class="empty">기준본으로 고정한 계획서가 있어야 점검을 시작할 수 있어요.<br><br><button class="btn pri" onclick="A.go('plans')">계획서 관리로 가기</button></div>`;
+  if (!locked.some(p => p.id === S.ui.planId)) S.ui.planId = locked[0].id;
+  const p = plan(S.ui.planId);
+  const m = S.ui.method;
+  const human = runOf(p.id, 'human');
+  const aiBlocked = m !== 'human' && !human && !p.practice;
+
+  const order = p.aiOrder
+    ? `<span class="small">AI 실행 순서: ${p.aiOrder.map((k, i) => `${i + 1}) ${METHODS[k]}`).join('  ')}</span>`
+    : `<button class="btn sm" onclick="A.randomOrder('${p.id}')">AI 두 방식의 실행 순서를 무작위로 정하기</button>`;
+
+  let body = '';
+  const r = runOf(p.id, m);
+  if (aiBlocked) {
+    body = `<div class="notice">사람 점검을 먼저 기록해야 AI 점검을 시작할 수 있어요. AI 답을 먼저 보면 사람 점검이 그 답에 끌려가기 쉬워서예요.</div>`;
+  } else if (m === 'human') {
+    body = `<details ${r ? '' : 'open'}><summary>점검할 계획서 본문</summary><pre class="doc" style="margin-top:8px">${esc(p.text)}</pre></details>` +
+      (r ? runInfo(r) : `<div class="panel" style="margin-top:12px"><div class="grid2">
+        <div><label class="f" for="rn-who">점검자</label><input type="text" id="rn-who" placeholder="이름"></div>
+        <div><label class="f" for="rn-date">점검일</label><input type="date" id="rn-date" value="${today()}"></div></div>
+        <div class="row" style="margin-top:14px"><button class="btn pri" onclick="A.startRun()">사람 점검 기록 시작</button></div></div>`);
+  } else {
+    const prompt = r ? r.prompt : buildPrompt(p, m);
+    body = `<label class="f">요청문 (${r ? '이 점검에 쓴 글' : 'AI에 그대로 보내는 글'})</label>
+      <textarea id="rn-prompt" class="tall" readonly>${esc(prompt)}</textarea>
+      <div class="row" style="margin:8px 0 0"><button class="btn sm" onclick="A.copy('rn-prompt')">요청문 복사</button>
+      <span class="small muted">두 AI 방식 모두 ${AI.name}의 새 대화에서 실행해요.</span></div>` +
+      (r ? runInfo(r) : (aiAvail === true || aiBusy ? autoPanel() + `<details style="margin-top:4px"><summary>예외: 직접 실행한 답변 붙여 넣기 (모델이 달라지면 결과에 꼭 적어요)</summary>${manualForm()}</details>`
+        : `<div class="panel" style="margin-top:16px"><h3>AI 점검하는 법</h3>
+            <ol class="steps"><li>위 요청문을 복사해요</li><li>Claude 앱에서 ${AI.name}를 고르고 새 대화에 붙여 넣어요</li><li>답변 원문을 아래에 그대로 붙여 넣고 저장해요</li></ol>
+            <div class="row" style="margin-top:12px"><a class="btn sm" href="https://claude.ai/new" target="_blank" rel="noopener">Claude 새 대화 열기</a></div>
+            ${manualForm(true)}</div>`));  }
+
+  return `
+  <h1>점검 실행</h1>
+  <p class="lede">계획서마다 사람 점검을 먼저 하고, AI 두 방식을 정해진 순서로 실행해요. 답변은 지적 하나씩 나눠 기록해요.</p>
+  <div class="row"><label class="f" for="rn-plan" style="margin:0">계획서</label>
+    <select id="rn-plan" style="max-width:360px" onchange="A.pickPlan(this.value)">${locked.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${esc(planLabel(x))}</option>`).join('')}</select>
+    ${order}</div>
+  <div class="tabs">${METHOD_KEYS.map(k => { const done = runOf(p.id, k); const dis = k !== 'human' && !human && !p.practice;
+    return `<button class="${k === m ? 'on' : ''}" ${dis ? 'disabled' : ''} onclick="A.pickMethod('${k}')">${METHODS[k]}${done ? ' ✓' : ''}</button>`; }).join('')}</div>
+  ${body}
+  ${r ? findingEditor(r) : ''}`;
+}
+function manualForm(inline) {
+  return `${inline ? '' : '<div class="panel" style="margin-top:8px">'}<div class="grid2">
+    <div><label class="f" for="rn-model">모델</label><input type="text" id="rn-model" value="${esc(S.ui.lastModel || AI.name)}"></div>
+    <div><label class="f" for="rn-date">실행일</label><input type="date" id="rn-date" value="${today()}"></div></div>
+    <label class="f" for="rn-resp">답변 원문 (고치지 말고 그대로 붙여 넣기)</label>
+    <textarea id="rn-resp" class="tall"></textarea>
+    <div class="row" style="margin-top:14px"><button class="btn pri" onclick="A.startRun()">답변 원문 저장</button></div>${inline ? '' : '</div>'}`;
+}
+function autoPanel() {
+  return `<div class="panel" style="margin-top:16px">
+    <div class="row" style="justify-content:space-between">
+      <div><strong>미리봄 AI로 점검하기</strong> <span class="tag brand">${AI.name} · effort ${AI.effortKo}</span>
+        <div class="small muted">요청문을 한 번 보내고, 답변 원문을 고치지 않고 그대로 저장해요.</div></div>
+      ${aiBusy ? '<button class="btn" onclick="A.stopAI()">멈추기</button>' : '<button class="btn pri" onclick="A.runAI()">AI 점검 실행</button>'}
+    </div>
+    ${aiBusy ? '<label class="f">답변 (실시간)</label><pre class="doc" id="ai-live">생각하는 중이에요… 보통 수십 초에서 1~2분 걸려요.</pre>' : ''}
+    ${aiMsg ? `<p class="small" style="margin:10px 0 0;color:var(--danger)">${esc(aiMsg)}</p>` : ''}
+  </div>`;
+}
+function runInfo(r) {
+  return `<div class="panel" style="margin-top:12px">
+    <div class="row" style="justify-content:space-between"><div class="small">
+      ${r.method === 'human' ? `점검자 <strong>${esc(r.who)}</strong>` : `모델 <strong>${esc(r.model)}</strong>${r.via === 'auto' ? ` · effort ${esc(r.effort)} · 미리봄 AI 자동 실행${r.usage ? ` · 토큰 ${r.usage.input_tokens}+${r.usage.output_tokens}` : ''}` : ' · 직접 붙여 넣음'}`} · ${esc(r.date)} 실행 · 기록 ${esc(r.created)}</div>
+      <button class="btn sm warn" onclick="A.delRun('${r.id}')">이 점검 기록 지우기</button></div>
+    ${r.modelOk === false ? `<div class="notice">${AI.name}가 아니라 다른 모델이 답했어요. 비교 실험의 ‘같은 모델’ 조건에 맞지 않으니, 이 기록을 지우고 나중에 다시 실행하는 것을 권해요.</div>` : ''}
+    ${r.stopReason === 'max_tokens' ? '<div class="notice">답변이 길이 제한에서 끊겼어요. 결과 해석 때 이 점을 적어 두세요.</div>' : ''}
+    ${r.method !== 'human' ? `<details style="margin-top:10px" open><summary>답변 원문</summary><pre class="doc" style="margin-top:8px">${esc(r.response)}</pre></details>` : ''}
+  </div>`;
+}
+function findingEditor(r) {
+  const list = fOfRun(r.id);
+  return `<h2>지적 기록 (${list.length}건)</h2>
+  ${list.map(f => `<div class="finding"><div class="row" style="justify-content:space-between">
+      <div class="row">${condTag(f.cond)}<span class="small muted">${fCode(f)}</span>${f.judgment ? `<span class="tag">${f.judgment}</span>` : ''}</div>
+      ${f.judgment ? '' : `<button class="btn sm warn" onclick="A.delFinding('${f.id}')">지우기</button>`}</div>
+    <div style="margin-top:6px">${esc(f.text)}</div>${f.evidence ? `<div class="q">${esc(f.evidence)}</div>` : ''}</div>`).join('')}
+  <div class="panel">
+    <h3>지적 추가</h3>
+    <label class="f" for="fd-cond">참여조건</label>
+    <select id="fd-cond">${S.conds.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}<option value="etc">기타 (네 조건에 해당 없음)</option></select>
+    <label class="f" for="fd-text">지적 내용</label><textarea id="fd-text" style="min-height:70px"></textarea>
+    <label class="f" for="fd-ev">근거 (계획서 인용)</label><textarea id="fd-ev" style="min-height:60px"></textarea>
+    <div class="row" style="margin-top:12px"><button class="btn pri" onclick="A.addFinding('${r.id}')">지적 추가</button>
+    <span class="small muted">${r.method === 'general' ? '일반 요청 답변은 조건이 표시되지 않으니, 기록하는 사람이 가장 가까운 조건을 골라요.' : '답변에 지적이 여러 개면 하나씩 나눠 넣어요.'}</span></div>
+  </div>`;
+}
+A.pickPlan = id => { S.ui.planId = id; S.ui.method = 'human'; save(); render(); };
+A.pickMethod = m => { S.ui.method = m; save(); render(); };
+A.randomOrder = id => { const o = ['general', 'explicit']; if (Math.random() < .5) o.reverse(); plan(id).aiOrder = o; commit('실행 순서를 정했어요.'); };
+A.startRun = () => {
+  const p = plan(S.ui.planId), m = S.ui.method;
+  if (runOf(p.id, m)) return;
+  const r = { id: uid(), planId: p.id, method: m, date: val('rn-date') || today(), created: nowStamp() };
+  if (m === 'human') { r.who = val('rn-who'); if (!r.who) return toast('점검자 이름을 적어 주세요.'); }
+  else {
+    r.model = val('rn-model'); r.response = $('rn-resp').value; r.prompt = buildPrompt(p, m);
+    if (!r.model) return toast('모델명을 적어 주세요. 버전까지 적으면 좋아요.');
+    if (!r.response.trim()) return toast('답변 원문을 붙여 넣어 주세요.');
+    S.ui.lastModel = r.model;
+  }
+  S.runs.push(r); commit('점검 기록을 저장했어요.');
+};
+A.runAI = async () => {
+  const p = plan(S.ui.planId), m = S.ui.method;
+  if (aiBusy || runOf(p.id, m) || m === 'human') return;
+  const sample = await getSample();
+  if (!sample) { aiAvail = false; return render(); }
+  aiBusy = true; aiMsg = ''; aiCtl = new AbortController(); render();
+  const prompt = buildPrompt(p, m);
+  try {
+    const res = await sample(prompt, {
+      model: AI.model, modelTier: 'complex', effort: AI.effort, cache: false, signal: aiCtl.signal,
+      onText: ({ text }) => { const el = $('ai-live'); if (el) el.textContent = text; }
+    });
+    const ok = res.modelApplied === AI.model;
+    S.runs.push({ id: uid(), planId: p.id, method: m, via: 'auto',
+      model: ok ? AI.model : `대체 모델 (${res.modelTierApplied} 등급)`, modelOk: ok, effort: ok ? AI.effort : '확인 불가',
+      date: today(), created: nowStamp(), prompt, response: res.text, stopReason: res.truncated ? 'max_tokens' : 'end_turn' });
+    aiBusy = false;
+    commit(ok ? 'AI 답변 원문을 저장했어요. 이제 지적을 하나씩 나눠 기록하세요.' : '다른 모델이 답했어요. 기록의 안내를 확인해 주세요.');
+  } catch (e) {
+    aiBusy = false;
+    if (e && e.code === 'cancelled') { aiMsg = ''; render(); return toast('점검을 멈췄어요. 기록은 남지 않았어요.'); }
+    const code = (e && e.code) || 'upstream_error';
+    if (['not_granted', 'sampling_disabled', 'capability_disabled', 'capability_removed', 'not_declared'].includes(code)) aiAvail = false;
+    aiMsg = AI_ERR[code] || AI_ERR.upstream_error;
+    render();
+  }
+};
+A.stopAI = () => { if (aiCtl) aiCtl.abort(); };
+A.delRun = async id => {
+  const n = fOfRun(id).length;
+  if (!await ask(`이 점검 기록${n ? '과 지적 ' + n + '건' : ''}을 지울까요? 되돌릴 수 없어요.`, '지우기', true)) return;
+  S.runs = S.runs.filter(r => r.id !== id); S.findings = S.findings.filter(f => f.runId !== id); commit('지웠어요.');
+};
+A.addFinding = rid => {
+  const text = val('fd-text'); if (!text) return toast('지적 내용을 적어 주세요.');
+  const r = S.runs.find(x => x.id === rid);
+  S.findings.push({ id: uid(), runId: rid, planId: r.planId, method: r.method, cond: val('fd-cond'), text, evidence: val('fd-ev'),
+    judgment: '', judge: '', reason: '', humanMissed: false, adopt: '', adoptReason: '' });
+  commit('지적을 추가했어요.');
+};
+A.delFinding = id => { S.findings = S.findings.filter(f => f.id !== id); commit(); };
+A.copy = id => {
+  const el = $(id);
+  const done = () => toast('복사했어요.');
+  if (navigator.clipboard) navigator.clipboard.writeText(el.value).then(done, () => { el.select(); document.execCommand('copy'); done(); });
+  else { el.select(); document.execCommand('copy'); done(); }
+};
+
+/* ---------- 3. 판단 기록지 ---------- */
+function vJudge() {
+  const blind = S.ui.blind;
+  let list = S.findings.slice();
+  if (S.ui.jPlan !== 'all') list = list.filter(f => f.planId === S.ui.jPlan);
+  if (S.ui.jShow === 'todo') list = list.filter(f => !f.judgment || keep.has(f.id));
+  list.sort(blind ? (a, b) => hash(a.id) - hash(b.id)
+    : (a, b) => (a.planId + METHOD_KEYS.indexOf(a.method)).localeCompare(b.planId + METHOD_KEYS.indexOf(b.method)));
+
+  const items = list.length ? list.map(f => {
+    const p = plan(f.planId), r = S.runs.find(x => x.id === f.runId) || {};
+    return `<div class="finding j-${f.judgment}">
+      <div class="row" style="justify-content:space-between"><div class="row">
+        <strong>${fCode(f)}</strong>${condTag(f.cond)}<span class="small muted">${esc(planLabel(p))}</span>
+        ${blind ? '' : `<span class="tag">${METHODS[f.method]}${r.model ? ' · ' + esc(r.model) : ''}</span>`}</div></div>
+      <div style="margin-top:8px">${esc(f.text)}</div>${f.evidence ? `<div class="q">${esc(f.evidence)}</div>` : ''}
+      <div class="row" style="margin-top:10px">
+        <div class="seg" role="group" aria-label="판정">${JUDGE.map(j => `<button class="${j} ${f.judgment === j ? 'on' : ''}" onclick="A.judge('${f.id}','${j}')">${j}</button>`).join('')}</div>
+        <input type="text" style="max-width:140px" placeholder="판정자" value="${esc(f.judge)}" onchange="A.setF('${f.id}','judge',this.value)" aria-label="판정자">
+        <input type="text" style="flex:1;min-width:200px" placeholder="판정 근거" value="${esc(f.reason)}" onchange="A.setF('${f.id}','reason',this.value)" aria-label="판정 근거">
+      </div>
+      ${blind ? '' : `<div class="row" style="margin-top:10px">
+        <select style="max-width:150px" onchange="A.setF('${f.id}','adopt',this.value,true)" aria-label="반영 여부">
+          ${[['', '반영 여부 미정'], ['반영', '반영'], ['보류', '보류'], ['제외', '제외']].map(([v, t]) => `<option value="${v}" ${f.adopt === v ? 'selected' : ''}>${t}</option>`).join('')}</select>
+        <input type="text" style="flex:1;min-width:200px" placeholder="반영·보류·제외 이유 (기관 사정 등)" value="${esc(f.adoptReason)}" onchange="A.setF('${f.id}','adoptReason',this.value)" aria-label="반영 이유">
+        ${f.method !== 'human' && f.judgment === '적중' ? `<label class="row small"><input type="checkbox" ${f.humanMissed ? 'checked' : ''} onchange="A.setF('${f.id}','humanMissed',this.checked,true)"> 사람 점검에 없던 장벽</label>` : ''}
+      </div>`}
+    </div>`;
+  }).join('') : `<div class="empty">${S.ui.jShow === 'todo' ? '판정할 지적이 없어요.' : '아직 기록된 지적이 없어요.'}</div>`;
+
+  return `
+  <h1>판단 기록지</h1>
+  <p class="lede">지적마다 맞는 지적인지(적중·오탐·보류)를 먼저 판정하고, 계획서에 반영할지는 따로 정해요. 맞는 지적이라도 기관 사정으로 반영하지 않을 수 있어요.</p>
+  <div class="panel row">
+    <select style="max-width:260px" onchange="A.setUI('jPlan',this.value)" aria-label="계획서">
+      <option value="all">모든 계획서</option>${S.plans.map(p => `<option value="${p.id}" ${S.ui.jPlan === p.id ? 'selected' : ''}>${esc(planLabel(p))}</option>`).join('')}</select>
+    <select style="max-width:160px" onchange="A.setUI('jShow',this.value)" aria-label="보기">
+      <option value="todo" ${S.ui.jShow === 'todo' ? 'selected' : ''}>미판정만</option><option value="all" ${S.ui.jShow === 'all' ? 'selected' : ''}>전체</option></select>
+    <label class="row small"><input type="checkbox" ${blind ? 'checked' : ''} onchange="A.setUI('blind',this.checked)"> 방식 가리기 (판정자용)</label>
+  </div>
+  ${blind ? '<div class="notice info">지금은 어느 방식에서 나온 지적인지 보이지 않아요. 판정자에게 이 화면을 보여 주세요. 반영 여부와 ‘사람 점검에 없던 장벽’ 표시는 가리기를 끄면 나타나요.</div>' : ''}
+  ${items}`;
+}
+A.setUI = (k, v) => { keep.clear(); S.ui[k] = v; save(); render(); };
+A.judge = (id, j) => {
+  const f = S.findings.find(x => x.id === id);
+  keep.add(id);
+  f.judgment = f.judgment === j ? '' : j;
+  if (f.judgment && !f.judge && S.ui.lastJudge) f.judge = S.ui.lastJudge;
+  if (f.judgment !== '적중') f.humanMissed = false;
+  commit();
+};
+A.setF = (id, k, v, rerender) => {
+  const f = S.findings.find(x => x.id === id); f[k] = typeof v === 'string' ? v.trim() : v;
+  if (k === 'judge' && v) S.ui.lastJudge = v.trim();
+  save(); if (rerender) render();
+};
+
+/* ---------- 4. 요약 비교 ---------- */
+function vSummary() {
+  const mainIds = new Set(S.plans.filter(p => !p.practice).map(p => p.id));
+  const fs = S.findings.filter(f => mainIds.has(f.planId));
+  const cols = [...S.conds.map(c => [c.id, c.name]), ['etc', '기타'], ['*', '전체']];
+  const cell = (m, c) => {
+    const x = fs.filter(f => f.method === m && (c === '*' || f.cond === c));
+    const h = x.filter(f => f.judgment === '적중').length, o = x.filter(f => f.judgment === '오탐').length;
+    const b = x.filter(f => f.judgment === '보류').length, u = x.filter(f => !f.judgment).length;
+    const main = h + o ? `<b>${h}/${h + o}</b> <span class="muted">(${Math.round(h / (h + o) * 100)}%)</span>` : `<span class="muted">계산 불가</span>`;
+    return `<td class="c cell">${main}<span class="sub">보류 ${b}${u ? ' · 미판정 ' + u : ''}</span></td>`;
+  };
+  const runsDone = S.runs.filter(r => mainIds.has(r.planId)).length;
+  const missed = m => fs.filter(f => f.method === m && f.humanMissed && f.judgment === '적중').length;
+  const unj = fs.filter(f => !f.judgment).length;
+
+  return `
+  <h1>요약 비교</h1>
+  <p class="lede">방식별·참여조건별 타당 비율이에요. 지적이 많은 방식이 아니라, 맞는 지적의 비율이 높은 방식을 봐요.</p>
+  <p class="small muted">본실험 점검 ${runsDone}회 · 지적 ${fs.length}건${unj ? ` · <strong>미판정 ${unj}건이 남아 있어 결과가 바뀔 수 있어요</strong>` : ''}</p>
+  <div class="tw"><table>
+    <tr><th>방식</th>${cols.map(([, n]) => `<th class="c">${esc(n)}</th>`).join('')}</tr>
+    ${METHOD_KEYS.map(m => `<tr><td><strong>${METHODS[m]}</strong></td>${cols.map(([c]) => cell(m, c)).join('')}</tr>`).join('')}
+  </table></div>
+  <div class="panel" style="margin-top:16px">
+    <h3>사람 점검에 없던 장벽을 AI가 찾은 경우 (적중)</h3>
+    <p style="margin:0">일반 AI 요청 <strong>${missed('general')}건</strong> · 조건 명시 AI 요청 <strong>${missed('explicit')}건</strong></p>
+    <p class="small muted" style="margin:6px 0 0">판단 기록지에서 ‘방식 가리기’를 끄고 표시한 지적만 세요.</p>
+  </div>
+  <div class="notice info">타당 비율 = 적중 ÷ (적중 + 오탐). 보류는 따로 세고, 판정된 지적이 없는 칸은 ‘계산 불가’로 둬요. 칸마다 지적 수가 적으므로 비율보다 건수를 함께 보고, 이 결과를 다른 계획서나 현장 전체로 일반화하지 않아요. 연습용 계획서는 빠져 있어요.</div>`;
+}
+
+/* ---------- 5. 수정 전후 비교 ---------- */
+function vRevision() {
+  const locked = S.plans.filter(p => p.lockedAt);
+  if (!locked.length) return `<h1>수정 전후 비교</h1><div class="empty">기준본으로 고정한 계획서가 있어야 해요.</div>`;
+  if (!locked.some(p => p.id === S.ui.revPlan)) S.ui.revPlan = locked[0].id;
+  const p = plan(S.ui.revPlan);
+  const rv = S.revisions[p.id] || { after: p.text, note: '', updated: '' };
+  const related = S.findings.filter(f => f.planId === p.id && f.judgment === '적중');
+  return `
+  <h1>수정 전후 비교</h1>
+  <p class="lede">판정과 반영 판단을 거친 지적으로 계획서를 고치고, 무엇이 바뀌었는지 남겨요. 기준본은 그대로 두고 수정본을 따로 저장해요.</p>
+  <select style="max-width:360px" onchange="A.setUI('revPlan',this.value)" aria-label="계획서">${locked.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${esc(planLabel(x))}</option>`).join('')}</select>
+
+  <h2>적중으로 판정된 지적 (${related.length}건)</h2>
+  ${related.length ? `<div class="tw"><table><tr><th>지적</th><th>조건</th><th>방식</th><th>반영 여부</th><th>이유</th></tr>
+    ${related.map(f => `<tr><td>${esc(f.text)}</td><td>${condTag(f.cond)}</td><td class="small">${METHODS[f.method]}</td><td>${esc(f.adopt || '미정')}</td><td class="small">${esc(f.adoptReason)}</td></tr>`).join('')}</table></div>`
+    : '<p class="muted small">아직 적중으로 판정된 지적이 없어요.</p>'}
+
+  <h2>본문</h2>
+  <div class="grid2">
+    <div><label class="f">기준본 (${esc(p.lockedAt)} 고정)</label><pre class="doc" style="max-height:none;min-height:260px">${esc(p.text)}</pre></div>
+    <div><label class="f" for="rv-after">수정본</label><textarea id="rv-after" class="tall" style="min-height:260px">${esc(rv.after)}</textarea></div>
+  </div>
+  <label class="f" for="rv-note">판단 과정 (무엇을 왜 고쳤고, 무엇을 왜 고치지 않았는지)</label>
+  <textarea id="rv-note">${esc(rv.note)}</textarea>
+  <div class="row" style="margin-top:12px"><button class="btn pri" onclick="A.saveRev()">수정본 저장</button>
+    ${rv.updated ? `<span class="small muted">마지막 저장 ${esc(rv.updated)}</span>` : ''}</div>
+
+  <h2>바뀐 부분</h2>
+  <p class="small muted"><ins style="background:var(--ins);text-decoration:none">추가된 말</ins> · <del style="background:var(--del)">지운 말</del></p>
+  <div class="diff">${diffHTML(p.text, rv.after)}</div>`;
+}
+A.saveRev = () => { S.revisions[S.ui.revPlan] = { after: $('rv-after').value, note: $('rv-note').value, updated: nowStamp() }; commit('수정본을 저장했어요.'); };
+
+function diffHTML(a, b) {
+  const split = s => s.split(/(\s+)/).filter(x => x !== '');
+  let x = split(a), y = split(b);
+  if (x.length * y.length > 3e6) { x = a.split(/(\n)/); y = b.split(/(\n)/); }
+  const n = x.length, m = y.length, W = m + 1;
+  const L = new Uint32Array((n + 1) * W);
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--)
+    L[i * W + j] = x[i] === y[j] ? L[(i + 1) * W + j + 1] + 1 : Math.max(L[(i + 1) * W + j], L[i * W + j + 1]);
+  let i = 0, j = 0, out = '';
+  while (i < n && j < m) {
+    if (x[i] === y[j]) { out += esc(x[i]); i++; j++; }
+    else if (L[(i + 1) * W + j] >= L[i * W + j + 1]) { out += `<del>${esc(x[i++])}</del>`; }
+    else { out += `<ins>${esc(y[j++])}</ins>`; }
+  }
+  while (i < n) out += `<del>${esc(x[i++])}</del>`;
+  while (j < m) out += `<ins>${esc(y[j++])}</ins>`;
+  return out || '<span class="muted">바뀐 부분이 없어요.</span>';
+}
+
+/* ---------- 자료 관리 ---------- */
+async function download(name, text, type) {
+  const dl = await getDownloads();
+  if (dl) {
+    try { const r = await dl.save({ filename: name, data: text }); if (r && r.status === 'saved') toast('파일을 저장했어요.'); }
+    catch (e) { toast('파일을 저장하지 못했어요.'); }
+    return;
+  }
+  const blob = new Blob([text], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  toast('파일을 내보냈어요.');
+}
+A.exportBackup = () => download(`miribom-backup-${today()}.json`, JSON.stringify(S, null, 2), 'application/json');
+A.importFile = input => {
+  const file = input.files[0]; if (!file) return;
+  const rd = new FileReader();
+  rd.onload = async () => {
+    try {
+      const d = JSON.parse(rd.result);
+      if (!Array.isArray(d.plans) || !Array.isArray(d.findings)) throw new Error();
+      if (!await ask('지금 브라우저의 자료를 백업 파일의 자료로 바꿀까요?', '불러오기')) { input.value = ''; return; }
+      const base = def(); S = Object.assign(base, d); S.ui = Object.assign(def().ui, d.ui || {});
+      commit('백업 파일을 불러왔어요.');
+    } catch (e) { toast('미리봄 백업 파일이 아니에요. 내보낸 .json 파일을 골라 주세요.'); }
+    input.value = '';
+  };
+  rd.readAsText(file);
+};
+A.exportCSV = kind => {
+  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  let rows;
+  if (kind === 'findings') {
+    rows = [['지적ID', '계획서', '연습용', '방식', '모델', '실행일', '참여조건', '지적', '근거', '판정', '판정자', '판정근거', '사람점검에없던장벽', '반영여부', '반영이유']];
+    S.findings.forEach(f => { const p = plan(f.planId), r = S.runs.find(x => x.id === f.runId) || {};
+      rows.push([fCode(f), planLabel(p), p && p.practice ? 'Y' : '', METHODS[f.method], r.model || r.who || '', r.date || '', condName(f.cond), f.text, f.evidence, f.judgment, f.judge, f.reason, f.humanMissed ? 'Y' : '', f.adopt, f.adoptReason]); });
+  } else {
+    rows = [['계획서', '연습용', '방식', '점검자/모델', 'effort', '실행방식', '실행일', '기록시각', '지적수', '요청문', '답변원문']];
+    S.runs.forEach(r => { const p = plan(r.planId);
+      rows.push([planLabel(p), p && p.practice ? 'Y' : '', METHODS[r.method], r.who || r.model, r.effort || '', r.method === 'human' ? '사람' : (r.via === 'auto' ? '미리봄 AI 자동' : '직접 붙여 넣음'), r.date, r.created, fOfRun(r.id).length, r.prompt || '', r.response || '']); });
+  }
+  download(`miribom-${kind === 'findings' ? '지적기록' : '점검기록'}-${today()}.csv`, '\uFEFF' + rows.map(r => r.map(q).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
+};
+A.addSample = () => {
+  S.plans.push({ id: uid(), code: '연습', practice: true, lockedAt: null, aiOrder: null, created: nowStamp(),
+    title: '어르신 스마트폰 기초 교실', target: '농촌 지역 재가 독거 어르신 12명',
+    text: '1. 목적: 스마트폰 사용 능력을 높여 가족·이웃과의 연락과 정보 접근을 돕는다.\n2. 기간 및 회기: 10월 매주 화요일 오전 9시~11시, 총 4회.\n3. 장소: 읍내 복지관 3층 교육실(엘리베이터 없음).\n4. 내용: 1회 전화·문자, 2회 카카오톡, 3회 사진 보내기, 4회 키오스크 사용.\n5. 모집: 복지관 홈페이지 공지와 안내문 배포. 신청은 온라인 신청서로 받는다.\n6. 비용: 교재비 1만 원 본인 부담. 개인 스마트폰 지참.\n7. 기대효과: 참여자의 80% 이상이 단체 대화방에 사진을 보낼 수 있다.' });
+  commit('연습용 예시 계획서를 넣었어요. 계획서 관리에서 확인하세요.');
+};
+A.resetAll = async () => {
+  if (!await ask('모든 계획서와 점검·판정 기록을 지울까요? 먼저 백업 파일을 내보내 두는 것을 권해요.', '지우기', true)) return;
+  if (!await ask('정말 지울까요? 되돌릴 수 없어요.', '모두 지우기', true)) return;
+  S = def(); commit('모든 자료를 지웠어요.');
+};
+
+function showIntro() {
+  // 복제본으로 바꿔 애니메이션을 처음부터 다시 재생
+  const old = $('intro'); const el = old.cloneNode(true); old.replaceWith(el);
+  el.hidden = false; el.classList.remove('out');
+  setTimeout(() => { const b = $('introEnter'); if (b && !el.hidden) b.focus({ preventScroll: true }); }, 50);
+}
+A.enter = () => {
+  const el = $('intro'); if (el.hidden) return;
+  el.classList.add('out');
+  setTimeout(() => { el.hidden = true; }, 450);
+  try { sessionStorage.setItem('miribom-intro', '1'); } catch (e) {}
+};
+A.replayIntro = () => showIntro();
+document.addEventListener('keydown', e => { if (!$('intro').hidden && (e.key === 'Escape' || e.key === 'Enter')) { e.preventDefault(); A.enter(); } });
+
+load(); render();
+getSample().then(fn => { aiAvail = !!fn; render(); });
+let seen = false;
+try { seen = sessionStorage.getItem('miribom-intro') === '1'; } catch (e) {}
+if (!seen) showIntro();
+</script>
+</body>
+</html>
