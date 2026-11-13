@@ -458,7 +458,7 @@ html.plain .top::after{opacity:.5}
 
 <script>
 const KEY = 'miribom-v1';
-const APP_VERSION = '2026.10.23-9';
+const APP_VERSION = '2026.11.13-1';
 const METHODS = { human: '사람 점검', general: '일반 AI 요청', explicit: '조건 명시 AI 요청' };
 const METHOD_KEYS = ['human', 'general', 'explicit'];
 const DEFAULT_CONDS = [
@@ -848,7 +848,8 @@ const LIBS = {
   jszip:   ['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js', () => window.JSZip],
   cfb:     ['https://cdn.jsdelivr.net/npm/cfb@1.2.2/dist/cfb.min.js', () => window.CFB],
   pako:    ['https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js', () => window.pako],
-  supa:    ['https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js', () => window.supabase]
+  supa:    ['https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js', () => window.supabase],
+  docx:    ['https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js', () => window.docx]
 };
 const PDF_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 const loadedLibs = {};
@@ -1134,15 +1135,21 @@ A.attachOriginal = pid => {
 /* ================= 계정(회원가입·로그인) — Supabase =================
    설정 전에는 로그인 없이 지금처럼 이 브라우저에만 저장돼요.
    설정 안내서(supabase_설정.sql)를 따라 만든 두 값을 아래에 붙여 넣으세요. */
-const CLOUD = { url: 'https://pzvodhbycxizceeeyrey.supabase.co' , anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB6dm9kaGJ5Y3hpemNlZWV5cmV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MzEzMzEsImV4cCI6MjEwODMwNzMzMX0.eBwjxDi-c2B_Em073V32qAxRHoLsQdNDxWb4jibD0ps' };
+const CLOUD = { url: '', anonKey: '' };
 const cloudOn = () => !!(CLOUD.url && CLOUD.anonKey);
 let sbClient = null, me = null, syncState = '', syncTimer = null;
 const BUCKET = 'plan-files';
+function cloudUrlProblem() {
+  const u = String(CLOUD.url || '').trim();
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(u)) return `Project URL 모양이 달라요. ‘https://영어숫자.supabase.co’까지만 넣어야 해요. 지금 값: ${u || '(비어 있음)'}`;
+  if (/\s/.test(CLOUD.anonKey) || CLOUD.anonKey.length < 30) return 'anon 키가 잘렸거나 중간에 띄어쓰기·줄바꿈이 들어갔어요. 키를 다시 복사해 한 줄로 붙여 넣어 주세요.';
+  return '';
+}
 async function getSb() {
   if (!cloudOn()) return null;
   if (sbClient) return sbClient;
   const lib_ = await lib('supa');
-  sbClient = lib_.createClient(CLOUD.url, CLOUD.anonKey, { auth: { persistSession: true, autoRefreshToken: true } });
+  sbClient = lib_.createClient(String(CLOUD.url).trim().replace(/\/$/, ''), String(CLOUD.anonKey).trim(), { auth: { persistSession: true, autoRefreshToken: true } });
   return sbClient;
 }
 const storeKey = () => me ? `${KEY}:${me.id}` : KEY;
@@ -1247,7 +1254,14 @@ A.authSubmit = async () => {
       if (error) throw error;
       $('auth').hidden = true; await afterLogin(data.user, true); toast(`${me.name}님, 반가워요.`); startIntro();
     }
-  } catch (e) { say(authErr(e), true); }
+  } catch (e) {
+    const prob = cloudUrlProblem();
+    const raw = String((e && e.message) || e || '');
+    if (prob) say(prob, true);
+    else if (/Failed to fetch|NetworkError|Load failed/i.test(raw)) say(`Supabase 서버(${String(CLOUD.url).trim()})에 연결하지 못했어요. 주소가 맞는지, Supabase에서 프로젝트가 멈춤(Paused) 상태가 아닌지 확인해 주세요.`, true);
+    else if (/Invalid API key|apikey|JWT/i.test(raw)) say('anon 키가 맞지 않아요. Project Settings → API Keys의 Legacy 탭에서 anon public 키를 다시 복사해 주세요.', true);
+    else say(authErr(e) + (raw ? ` (자세히: ${raw.slice(0, 120)})` : ''), true);
+  }
   $('au-go').disabled = false;
 };
 A.useGuest = () => { try { sessionStorage.setItem('miribom-guest', '1'); } catch (e) {} $('auth').hidden = true; startIntro(); };
@@ -1863,6 +1877,8 @@ function vRevision() {
   <label class="f" for="rv-note">판단 과정 (무엇을 왜 고쳤고, 무엇을 왜 고치지 않았는지)</label>
   <textarea id="rv-note">${esc(rv.note)}</textarea>
   <div class="row" style="margin-top:12px"><button class="btn pri" onclick="A.saveRev()">수정본 저장</button>
+    <button class="btn" onclick="A.downloadRevision('docx')">수정본 Word 파일로 내려받기</button>
+    <button class="btn" onclick="A.downloadRevision('print')">인쇄 · PDF로 저장</button>
     ${rich && rv.html ? `<button class="btn sm" onclick="A.resetRev()">기준본으로 되돌리기</button>` : ''}
     ${rv.updated ? `<span class="small muted">마지막 저장 ${esc(rv.updated)}</span>` : ''}</div>
 
@@ -1889,6 +1905,98 @@ A.resetRev = async () => {
   if (!await ask('수정본을 지우고 기준본 모양으로 되돌릴까요? 판단 과정 메모는 남아요.', '되돌리기')) return;
   const r = S.revisions[S.ui.revPlan]; if (r) { delete r.html; delete r.after; } commit('기준본 모양으로 되돌렸어요.');
 };
+/* ---------- 수정본 내려받기: Word(.docx)·인쇄(PDF) — 표·굵은 글씨·목록을 그대로 옮김 ---------- */
+function currentRevisionHtml() {
+  const doc = $('rv-doc'), ta = $('rv-after');
+  if (doc) return sanitizeHtml(doc.innerHTML);
+  const p = plan(S.ui.revPlan), rv = S.revisions[S.ui.revPlan] || {};
+  const text = ta ? ta.value : (rv.after != null ? rv.after : p.text);
+  return renderPlanText(text);
+}
+async function htmlToDocxBlob(html, title) {
+  const D = await lib('docx');
+  const root = new DOMParser().parseFromString(`<div>${html}</div>`, 'text/html').body.firstChild;
+  const runsOf = (node, fmt = {}) => {
+    const out = [];
+    for (const c of Array.from(node.childNodes)) {
+      if (c.nodeType === 3) { const t = c.textContent.replace(/\s+/g, ' '); if (t) out.push(new D.TextRun(Object.assign({ text: t }, fmt))); }
+      else if (c.nodeType === 1) {
+        const tg = c.tagName;
+        if (tg === 'BR') out.push(new D.TextRun({ text: '', break: 1 }));
+        else out.push(...runsOf(c, Object.assign({}, fmt, tg === 'STRONG' || tg === 'B' || tg === 'TH' ? { bold: true } : {}, tg === 'EM' || tg === 'I' ? { italics: true } : {}, tg === 'U' ? { underline: {} } : {}, tg === 'DEL' || tg === 'S' ? { strike: true } : {})));
+      }
+    }
+    return out;
+  };
+  const HEAD = { H1: D.HeadingLevel.HEADING_1, H2: D.HeadingLevel.HEADING_2, H3: D.HeadingLevel.HEADING_3, H4: D.HeadingLevel.HEADING_4, H5: D.HeadingLevel.HEADING_5, H6: D.HeadingLevel.HEADING_6 };
+  const BLOCK = /^(P|DIV|H[1-6]|UL|OL|LI|TABLE|PRE|BLOCKQUOTE|SECTION)$/;
+  function blocks(el, bold) {
+    const out = [];
+    let inline = [];
+    const flushInline = () => { const runs = []; inline.forEach(n => runs.push(...runsOf({ childNodes: [n] }, bold ? { bold: true } : {}))); if (runs.length) out.push(new D.Paragraph({ children: runs })); inline = []; };
+    for (const c of Array.from(el.childNodes)) {
+      if (c.nodeType === 3 || (c.nodeType === 1 && !BLOCK.test(c.tagName))) { if (c.nodeType !== 3 || c.textContent.trim()) inline.push(c); continue; }
+      if (c.nodeType !== 1) continue;
+      flushInline();
+      const tg = c.tagName;
+      if (HEAD[tg]) out.push(new D.Paragraph({ heading: HEAD[tg], children: runsOf(c) }));
+      else if (tg === 'UL' || tg === 'OL') {
+        let n = +(c.getAttribute('start') || 1);
+        for (const li of Array.from(c.children).filter(x => x.tagName === 'LI')) {
+          const pre = tg === 'OL' ? `${n++}. ` : '• ';
+          const inner = Array.from(li.children).some(x => BLOCK.test(x.tagName)) ? li.textContent.replace(/\s+/g, ' ').trim() : null;
+          out.push(new D.Paragraph({ indent: { left: 360, hanging: 260 }, children: [new D.TextRun({ text: pre }), ...(inner != null ? [new D.TextRun({ text: inner })] : runsOf(li))] }));
+        }
+      } else if (tg === 'TABLE') {
+        const rows = Array.from(c.rows).map(tr => new D.TableRow({ children: Array.from(tr.cells).map(td => {
+          const kids = blocks(td, td.tagName === 'TH');
+          const o = { children: kids.length ? kids : [new D.Paragraph('')], margins: { top: 60, bottom: 60, left: 90, right: 90 } };
+          if (+td.getAttribute('colspan') > 1) o.columnSpan = +td.getAttribute('colspan');
+          if (+td.getAttribute('rowspan') > 1) o.rowSpan = +td.getAttribute('rowspan');
+          if (td.tagName === 'TH') o.shading = { fill: 'F3F0EA', type: D.ShadingType.CLEAR, color: 'auto' };
+          return new D.TableCell(o);
+        }) }));
+        if (rows.length) { out.push(new D.Table({ rows, width: { size: 100, type: D.WidthType.PERCENTAGE } })); out.push(new D.Paragraph('')); }
+      } else if (tg === 'PRE') c.textContent.split('\n').forEach(l => out.push(new D.Paragraph({ children: [new D.TextRun(l)] })));
+      else if (Array.from(c.children).some(x => BLOCK.test(x.tagName))) out.push(...blocks(c, bold));
+      else { const runs = runsOf(c, bold ? { bold: true } : {}); out.push(new D.Paragraph({ children: runs.length ? runs : [new D.TextRun('')] })); }
+    }
+    flushInline();
+    return out;
+  }
+  const children = blocks(root);
+  const doc = new D.Document({
+    creator: '미리봄', title,
+    styles: { default: { document: { run: { font: '맑은 고딕', size: 20 } } } },
+    sections: [{ properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } } }, children: children.length ? children : [new D.Paragraph('')] }]
+  });
+  return D.Packer.toBlob(doc);
+}
+A.downloadRevision = async kind => {
+  const p = plan(S.ui.revPlan); if (!p) return;
+  const html = currentRevisionHtml();
+  const base = `${(p.title || planLabel(p)).replace(/[\\/:*?"<>|]/g, '').slice(0, 40)}_수정본_${today()}`;
+  if (kind === 'print') {
+    const w = window.open('', '_blank');
+    if (!w) return toast('새 창이 막혔어요. 브라우저의 팝업 허용을 켜 주세요.');
+    w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${esc(base)}</title><style>
+      body{font:11pt/1.6 "맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#111;margin:18mm}
+      table{border-collapse:collapse;width:100%;margin:6px 0 12px} td,th{border:1px solid #777;padding:4px 7px;vertical-align:top} th{background:#F3F0EA}
+      h1,h2,h3{margin:14px 0 6px} p{margin:0 0 5px} @page{size:A4;margin:15mm}</style></head><body>${html}</body></html>`);
+    w.document.close(); w.focus(); setTimeout(() => w.print(), 300);
+    return;
+  }
+  try {
+    toast('Word 파일을 만드는 중이에요…');
+    const blob = await htmlToDocxBlob(html, base);
+    const dl = await getDownloads();
+    if (dl) { const r = await dl.save({ filename: `${base}.docx`, data: new Uint8Array(await blob.arrayBuffer()) }); if (r && r.status === 'saved') toast('Word 파일을 저장했어요.'); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${base}.docx`; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+    toast('Word 파일을 내려받았어요. 한글에서도 열려요.');
+  } catch (e) { toast('Word 파일을 만들지 못했어요. 인터넷 연결을 확인하거나 ‘인쇄·PDF’를 써 주세요.'); }
+};
+
 /* 수정본을 원본 모양 그대로 보여 주면서, 바뀐 곳·추가된 곳을 빨간색으로 표시 */
 function similar(a, b) {
   const g = t => { const s = new Set(); t = t.replace(/\s+/g, ''); for (let k = 0; k < t.length - 1; k++) s.add(t.slice(k, k + 2)); return s; };
